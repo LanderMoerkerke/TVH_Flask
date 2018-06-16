@@ -7,6 +7,7 @@ static/model/**
 *.h5
 .vscode
 .DS_Store
+static/uploads/**
 
 # User-specific files
 *.suo
