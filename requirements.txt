@@ -1,0 +1,7 @@
+Flask==1.0.2
+Flask-Uploads==0.2.1
+Keras==2.2.0
+numpy==1.14.2
+pandas==0.22.0
+scikit-image==0.14.0
+scikit-learn==0.19.1
