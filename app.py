@@ -1,7 +1,7 @@
 import os
 
 # Imports FLASK
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, Response
 from flask_uploads import UploadSet, configure_uploads, IMAGES
 
 # Imports ML
@@ -17,6 +17,8 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.tree import _tree
 
 import operator
+
+from static.classes.Camera import Camera
 
 # Functies
 _TREE = []
@@ -128,7 +130,6 @@ configure_uploads(app, photos)
 def upload():
     # Globale variabelen
     global klasses, d, counter_answer, _QUESTIONS
-
     if request.method == 'POST' and 'photo' in request.files:
         filename = photos.save(request.files['photo'])
         print(filename)
@@ -196,6 +197,27 @@ def upload():
     # tree_in_code = ""
     print('Lege boom.')
     return render_template('load_image.html')
+
+
+@app.route('/capture_image')
+def capture_image():
+    """Capture image."""
+    return render_template('capture.html')
+
+
+@app.route('/video_feed')
+def video_feed():
+    """Video streaming route. Put this in the src attribute of an img tag."""
+    return Response(
+        gen(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+def gen(camera):
+    """Video streaming generator function."""
+    while True:
+        frame = camera.get_frame()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + bytes(frame) + b'\r\n')
 
 
 @app.route('/questions')

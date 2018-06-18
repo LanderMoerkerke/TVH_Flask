@@ -1,13 +1,15 @@
-{% extends 'layout.html' %}
-{% block title %}
-Image upload
-{% endblock %}
-{% block body %}
-    <h1>Image upload</h1>
-    <p>Classifier</p>
-    <form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
-        <input type=file name=photo>
-        <input type="submit">
-    </form>
-    <a href="{{ url_for('index') }}"><button>Home</button></a>
+{% extends 'layout.html' %} {% block title %} Image upload {% endblock %} {% block body %}
+<!-- body -->
+<h1>Image upload</h1>
+<p>Classifier</p>
+<form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
+    <input type=file name=photo>
+    <a href="{{ url_for('capture_image') }}">
+        <input type="button" value="Maak zelf een foto" />
+    </a>
+    <input type="submit" value="Verzenden">
+</form>
+<a href="{{ url_for('index') }}">
+    <button>Home</button>
+</a>
 {% endblock %}
