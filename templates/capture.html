@@ -1,0 +1,64 @@
+{% extends 'layout.html' %} {% block title %} Foto nemen {% endblock %} {% block body %}
+<div class="wrapper boxed">
+    <!-- Content CLick Capture-->
+    <div class="click-capture"></div>
+
+    <!-- Sidebar Menu-->
+    <div class="menu">
+        <span class="close-menu icon-cross2 right-boxed"></span>
+        <!--<div class="menu-lang right-boxed">
+        <a href="" class="active">Eng</a>
+        <a href="">Fra</a>
+        <a href="">Ger</a>
+      </div>-->
+        <ul class="menu-list right-boxed">
+            <li>
+                <a data-scroll href="{{ url_for('index') }}">Home</a>
+            </li>
+            <li>
+                <a data-scroll href="{{ url_for('upload') }}">Start</a>
+            </li>
+        </ul>
+
+        <div class="menu-footer right-boxed">
+            <div class="social-list">
+            </div>
+            <div class="copy">
+                Powered by
+                <br>
+                <a href="https://www.howest.be/" target="_blank">
+                    <img style="max-width:20%" src="{{ url_for('static',filename='img/Howest.png') }}" alt="Howest" />
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <header class="navbar boxed js-navbar">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+
+        <a class="brand" href="index.html">
+            <img alt="" src="{{ url_for('static',filename='img/tvh.png') }}">
+        </a>
+
+        <div class="navbar-spacer hidden-sm hidden-xs"></div>
+
+        <address class="navbar-address hidden-sm hidden-xs">
+            <span class="text-dark">Project 3 - TVH [GROEP 2]</span>
+        </address>
+    </header>
+
+    <div class="content" style="margin-top: 2%">
+        <div class="container">
+            <form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
+                <img src="{{ url_for('video_feed') }}" alt="Geen camera beschikbaar">
+                <input type="submit" value="Neem foto"></input>
+            </form>
+        </div>
+    </div>
+
+    {% endblock %}

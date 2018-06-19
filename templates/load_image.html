@@ -1,23 +1,24 @@
-{% extends 'layout.html' %}
-{% block title %}
-Image upload
-{% endblock %}
-{% block body %}
-    <h1>Image upload</h1>
-     <div class="content" style="margin-top: 2%">
-      <div class="container">
-            <div class="intro">
-                      <div class="row vragen">
-                        <div class="col-md-12">
-                          <h3 class="headervragen">Upload Image</h3>
-                          <form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
-                            <input type=file name=photo style="margin:0 auto;">
-                             <input class="btnsubmit" type="submit" style="text-align:center;">
-                            </form>
-                            <a href="{{ url_for('index') }}"><button class="btnhome">Home</button></a>
-                      </div>
-                      </div>
-                    </div>
-                  </div>
+{% extends 'layout.html' %} {% block title %} Image upload {% endblock %} {% block body %}
+<h1>Image upload</h1>
+<div class="content" style="margin-top: 2%">
+    <div class="container">
+        <div class="intro">
+            <div class="row vragen">
+                <div class="col-md-12">
+                    <h3 class="headervragen">Upload Image</h3>
+                    <form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
+                        <input type=file name=photo style="margin:0 auto;">
+                        <input class="btnsubmit" type="submit" style="text-align:center;">
+                        <a href="{{ url_for('capture_image') }}">
+                            <input type="button" value="Maak zelf een foto" />
+                        </a>
+                    </form>
+                    <a href="{{ url_for('index') }}">
+                        <button class="btnhome">Home</button>
+                    </a>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
