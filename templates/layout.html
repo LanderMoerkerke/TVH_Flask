@@ -19,10 +19,7 @@
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i|Poppins:300,400,500,600,700" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-
-    {% block head %}{% endblock %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> {% block head %}{% endblock %}
 
     <style>
         .btnsubmit {
@@ -132,7 +129,7 @@
     <!-- Scripts -->
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
     <script src="{{ url_for('static', filename='js/rev-slider-init.js') }}"></script>
-
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script>
         $(function () {
             $('#lokaal').click(function () {
