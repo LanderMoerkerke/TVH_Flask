@@ -81,8 +81,10 @@
             }
         }
     </style>
-    <<<<<<< HEAD=======< header class="navbar boxed js-navbar">
+</head>
 
+<body>
+    <header class="navbar boxed js-navbar">
         <a class="brand" href="#">
             <img alt="" src="{{ url_for('static',filename='img/tvh.png') }}">
         </a>
@@ -92,14 +94,7 @@
                 <img alt="" src="{{ url_for('static',filename='img/Howest.png') }}">
             </a>
         </address>
-
-
-
-        </header>
-        {% block head %} {% endblock %} >>>>>>> fe654723a44b885102fd50d231bbc3dae58f759d
-</head>
-
-<body>
+    </header>
     {% block body %} {% endblock %}
     <!-- jQuery -->
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
