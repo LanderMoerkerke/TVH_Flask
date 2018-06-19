@@ -16,6 +16,7 @@ from skimage import transform
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.tree import _tree
 
+import cv2
 import operator
 
 # Functies
@@ -103,6 +104,7 @@ klasses = [
     '18060301', '18060302', '18080000', '18100200', '18110000', '18120000',
     '20010200', '23010000', '23020000'
 ]
+filename = ""
 
 # Initialise model
 filename_model = os.path.join(os.path.dirname(__file__), 'static/model', 'my_model_test.h5')
@@ -128,7 +130,7 @@ configure_uploads(app, photos)
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     # Globale variabelen
-    global klasses, d, counter_answer, _QUESTIONS
+    global klasses, d, counter_answer, _QUESTIONS, _IMAGE, filename
 
     if request.method == 'POST' and 'photo' in request.files:
         filename = photos.save(request.files['photo'])
@@ -136,7 +138,9 @@ def upload():
 
         # Inlezen van image (gekregen van vorige pagina, beslissen in load_image naar welke pagina.)
         _IMAGE = os.path.join(os.path.dirname(__file__), 'static/uploads', filename)
-        _IMAGE = imread(_IMAGE, as_grey=1)
+        _IMAGE = imread(_IMAGE, as_grey=True)
+        _IMAGE = cv2.resize(_IMAGE, (256, 256), interpolation=cv2.INTER_LINEAR)
+
         _IMAGE = _IMAGE.reshape(-1, 256, 256, 1)
 
         # Predictie doen op image.
@@ -247,7 +251,9 @@ def button_press_no():
 
 @app.route('/prediction/<group>/<maximum>')
 def prediction(group, maximum):
+    global filename
     print('prediction vars', group, maximum)
+
 
     d_chars = pd.read_excel(
         open(os.path.join(os.path.dirname(__file__), 'static/data', 'output.xlsx'), 'rb'), sheet_name='Sheet1')
@@ -264,7 +270,7 @@ def prediction(group, maximum):
         'prediction.html',
         group=group,
         maximum=int(maximum * 100),
-        chars_list=chars_list[:5])
+        chars_list=chars_list[:5], image=filename)
 
 
 if __name__ == '__main__':
