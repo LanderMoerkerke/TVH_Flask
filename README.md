@@ -4,7 +4,7 @@
 
 * Python
 
-## Instalation
+## Installation
 
 1. Install the requirements by following this command:
 
