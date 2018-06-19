@@ -7,7 +7,7 @@
                 <div class="col-md-12">
                     <h3 class="headervragen">Upload Image</h3>
                     <form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
-                        <input type=file name=photo style="margin:0 auto;">
+                        <input type=file name=photo style="margin:0 auto;" required>
                         <input class="btnsubmit" type="submit" style="text-align:center;">
                         <a href="{{ url_for('capture_image') }}">
                             <input type="button" value="Maak zelf een foto" />
