@@ -268,7 +268,7 @@ def prediction(group, maximum):
 
     return render_template(
         'prediction.html',
-        group=group,
+        group=str(group),
         maximum=int(maximum * 100),
         chars_list=chars_list[:5], image=filename)
 
