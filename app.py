@@ -107,6 +107,7 @@ klasses = [
     '20010200', '23010000', '23020000'
 ]
 filename = ""
+question_answer = ""
 
 # Initialise model
 filename_model = os.path.join(
@@ -232,7 +233,6 @@ def gen(camera):
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + bytes(frame) + b'\r\n')
 
-
 @app.route('/questions')
 def questions(lijst):
     print('questions lijst', _QUESTIONS)
@@ -261,13 +261,15 @@ def button_press_yes():
 
 @app.route('/button_press_no')
 def button_press_no():
-    global _QUESTIONS, counter_answer
+    global _QUESTIONS, counter_answer, question_answer
     global d
     counter_answer += 1
     print('no lijst', _QUESTIONS)
     if counter_answer == 1:
         print("NEE 1x")
-        return render_template('questions.html', lijst=_QUESTIONS[1])
+        question_answer = _QUESTIONS[0] + " - " + "Nee."
+
+        return render_template('questions.html', lijst=_QUESTIONS[1], question_answer= question_answer)
 
         #_PERC = d.get(int(_QUESTIONS[4]).__str__())
         #return prediction(_QUESTIONS[4], _PERC)
@@ -281,7 +283,9 @@ def button_press_no():
 
 @app.route('/prediction/<group>/<maximum>')
 def prediction(group, maximum):
-    global filename
+    global filename, question_answer
+    "Antwoord & vraag terug op leeg zetten"
+    question_answer = ""
     print('prediction vars', group, maximum)
 
     d_chars = pd.read_excel(
