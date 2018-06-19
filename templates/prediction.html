@@ -68,7 +68,9 @@ Prediction
                           <strong class="section-subtitle"></strong>
                           <h2 class="section-title section-about-title" style="margin-bottom: 20px; font-weight: lighter;">GROEPSCODE<br><div class="groupcode">
                           {{ group }}</div></h2>
-                          <img src="{{ url_for('static',filename='img/blok.png') }}" style="max-width: 250px; border: solid black; border-width: thin;">
+                              <img src="{{ url_for('static', filename='cats/' + group + '.jpg') }}" style="max-width: 250px; border: solid black; border-width: thin;">
+
+                          <img src="{{ url_for('static', filename='uploads/' + image) }}" style="max-width: 250px; border: solid black; border-width: thin;">
                           <!--<div class="experience-box">
                             <div class="experience-border"></div>
                             <div class="experience-content">

@@ -16,6 +16,7 @@ from skimage import transform
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.tree import _tree
 
+import cv2
 import operator
 
 from static.classes.Camera import Camera
@@ -105,13 +106,20 @@ klasses = [
     '18060301', '18060302', '18080000', '18100200', '18110000', '18120000',
     '20010200', '23010000', '23020000'
 ]
+filename = ""
 
 # Initialise model
-filename_model = 'static/model/my_model_test.h5'
+filename_model = os.path.join(
+    os.path.dirname(__file__), 'static/model', 'my_model_test.h5')
+
 model = load_model(filename_model)
 model._make_predict_function()
 dataset_one_hot_encoding = pd.read_excel(
-    open('static/data/one_hot_encoding.xlsx', 'rb'), sheet_name='Sheet1')
+    open(
+        os.path.join(
+            os.path.dirname(__file__), 'static/data', 'one_hot_encoding.xlsx'),
+        'rb'),
+    sheet_name='Sheet1')
 
 
 @app.route('/')
@@ -122,21 +130,26 @@ def index():
 
 photos = UploadSet('photos', IMAGES)
 
-app.config['UPLOADED_PHOTOS_DEST'] = 'static/uploads'
+app.config['UPLOADED_PHOTOS_DEST'] = os.path.join(
+    os.path.dirname(__file__), 'static/uploads')
 configure_uploads(app, photos)
 
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     # Globale variabelen
-    global klasses, d, counter_answer, _QUESTIONS
+    global klasses, d, counter_answer, _QUESTIONS, _IMAGE, filename
+
     if request.method == 'POST' and 'photo' in request.files:
         filename = photos.save(request.files['photo'])
         print(filename)
 
         # Inlezen van image (gekregen van vorige pagina, beslissen in load_image naar welke pagina.)
-        _IMAGE = 'static/uploads/%s' % filename
-        _IMAGE = imread(_IMAGE, as_grey=1)
+        _IMAGE = os.path.join(
+            os.path.dirname(__file__), 'static/uploads', filename)
+        _IMAGE = imread(_IMAGE, as_grey=True)
+        _IMAGE = cv2.resize(_IMAGE, (256, 256), interpolation=cv2.INTER_LINEAR)
+
         _IMAGE = _IMAGE.reshape(-1, 256, 256, 1)
 
         # Predictie doen op image.
@@ -235,34 +248,48 @@ def button_press_yes():
     print('counter answer', counter_answer)
     print('yes lijst', _QUESTIONS)
     if counter_answer == 1:
-        return render_template('questions.html', lijst=_QUESTIONS[1])
+        print("YES x1")
+        _PERC = d.get(int(_QUESTIONS[4]).__str__())
+        return prediction(_QUESTIONS[4], _PERC)
+        # return render_template('questions.html', lijst = _QUESTIONS[1])
     else:
-        _PERC = d.get(int(_QUESTIONS[2]).__str__())
-        return prediction(_QUESTIONS[2], _PERC)
+        print("YES als je NEE eerder antwoordde.")
+        _PERC = d.get(int(_QUESTIONS[3]).__str__())
+        return prediction(_QUESTIONS[3], _PERC)
         #return render_template('prediction.html', group=lijst[2], maximum=_PERC)
 
 
 @app.route('/button_press_no')
 def button_press_no():
-    global _QUESTIONS
+    global _QUESTIONS, counter_answer
     global d
+    counter_answer += 1
     print('no lijst', _QUESTIONS)
-    if counter_answer == 0:
-        _PERC = d.get(int(_QUESTIONS[4]).__str__())
-        return prediction(_QUESTIONS[4], _PERC)
+    if counter_answer == 1:
+        print("NEE 1x")
+        return render_template('questions.html', lijst=_QUESTIONS[1])
+
+        #_PERC = d.get(int(_QUESTIONS[4]).__str__())
+        #return prediction(_QUESTIONS[4], _PERC)
         #return render_template('prediction.html', group=lijst[4], maximum=_PERC)
     else:
-        _PERC = d.get(int(_QUESTIONS[3]).__str__())
-        return prediction(_QUESTIONS[3], _PERC)
+        print("NEE 2x")
+        _PERC = d.get(int(_QUESTIONS[2]).__str__())
+        return prediction(_QUESTIONS[2], _PERC)
         #return render_template('prediction.html', group=lijst[3], maximum=_PERC)
 
 
 @app.route('/prediction/<group>/<maximum>')
 def prediction(group, maximum):
+    global filename
     print('prediction vars', group, maximum)
 
     d_chars = pd.read_excel(
-        open('static/data/output.xlsx', 'rb'), sheet_name='Sheet1')
+        open(
+            os.path.join(
+                os.path.dirname(__file__), 'static/data', 'output.xlsx'),
+            'rb'),
+        sheet_name='Sheet1')
 
     chars_list = list(
         d_chars.loc[d_chars.GroupCode.isin([int(group)]), 'CHARS'])
@@ -274,9 +301,10 @@ def prediction(group, maximum):
 
     return render_template(
         'prediction.html',
-        group=group,
+        group=str(group),
         maximum=int(maximum * 100),
-        chars_list=chars_list[:5])
+        chars_list=chars_list[:5],
+        image=filename)
 
 
 if __name__ == '__main__':
