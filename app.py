@@ -245,7 +245,6 @@ def gen(camera):
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + bytes(frame) + b'\r\n')
 
-<<<<<<< HEAD
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -263,7 +262,7 @@ def predict():
     print(_IMAGE)
 
     _IMAGE = imread(_IMAGE, as_grey=True)
-    
+
     _IMAGE = cv2.resize(_IMAGE, (256, 256), interpolation=cv2.INTER_LINEAR)
     _IMAGE = _IMAGE.reshape(-1, 256, 256, 1)
 
@@ -322,8 +321,6 @@ def predict():
         return questions(_QUESTIONS)
 
 
-=======
->>>>>>> d5218b6bd2006fc81a6aaebf560be9daec1855c3
 @app.route('/questions')
 def questions(lijst):
     print('questions lijst', _QUESTIONS)
@@ -360,7 +357,10 @@ def button_press_no():
         print("NEE 1x")
         question_answer = _QUESTIONS[0] + " - " + "Nee."
 
-        return render_template('questions.html', lijst=_QUESTIONS[1], question_answer= question_answer)
+        return render_template(
+            'questions.html',
+            lijst=_QUESTIONS[1],
+            question_answer=question_answer)
 
         #_PERC = d.get(int(_QUESTIONS[4]).__str__())
         #return prediction(_QUESTIONS[4], _PERC)
