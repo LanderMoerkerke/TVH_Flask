@@ -1,7 +1,4 @@
 import cv2
-import time
-from shutil import copyfile
-from skimage.io import imsave
 
 
 class Camera():
