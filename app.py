@@ -23,7 +23,6 @@ import operator
 
 from static.classes.Camera import Camera
 
-
 # Functies
 _TREE = []
 counter1 = 0
@@ -114,7 +113,7 @@ question_answer = ""
 
 # Initialise model
 filename_model = os.path.join(
-    os.path.dirname(__file__), 'static/model', 'my_model_v4_aug.h5')
+    os.path.dirname(__file__), 'static/model', 'my_model_test.h5')
 
 model = load_model(filename_model)
 model._make_predict_function()
