@@ -54,9 +54,9 @@
 
     <div class="content" style="margin-top: 2%">
         <div class="container">
-            <form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
-                <img src="{{ url_for('video_feed') }}" alt="Geen camera beschikbaar">
-                <input type="submit" value="Neem foto"></input>
+            <form method=POST enctype=multipart/form-data action="{{ url_for('predict') }}">
+                <img id="video_feed" src="{{ url_for('video_feed') }}" alt="Geen camera beschikbaar">
+                <input id="take_picture" type="submit" value="Neem foto"></input>
             </form>
         </div>
     </div>

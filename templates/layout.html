@@ -19,38 +19,70 @@
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i|Poppins:300,400,500,600,700" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-
-    {% block head %}{% endblock %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> {% block head %}{% endblock %}
 
     <style>
         .btnsubmit {
-            border-radius: 30px;
-            margin-top: 10px;
-            border: solid rgba(169, 169, 169);
-            color: forestgreen;
-            font-size: 20px;
-            text-align: center;
-            padding: 10px 10px 10px 10px;
-            text-decoration: none;
-            background: white;
+            border: dotted grey;
             border-width: thin;
-            width: 20%;
-            margin-bottom: 20px;
+            text-align: center;
+            margin-top: 10px;
+            padding: 5px 10px 5px 10px;
+            color: black;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        .btnsubmit:hover{
+            background: lightgrey;
+            text-decoration: none;
         }
 
         .btnhome {
-            border-radius: 30px;
-            border: solid rgba(169, 169, 169);
-            color: darkred;
-            font-size: 20px;
-            text-align: center;
-            padding: 10px 20px 10px 20px;
-            text-decoration: none;
+            border-radius: 10px;
+            font-family: Roboto;
+            color: grey;
+            border: solid grey;
+            font-size: 10px;
             background: white;
             border-width: thin;
+            padding: 5px 10px 5px 10px;
+            text-decoration: none;
+
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .btnhome:hover{
+            background-color: lightgrey;
+            text-decoration: none;
+        }
+
+        .btncenter{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 35px;
             width: 20%;
+        }
+
+        .btncenter:hover{
+            text-decoration:none;
+        }
+
+        .btnwebcam{
+            border: dotted grey;
+            border-width: thin;
+            text-align: center;
+            padding: 25px 50px 25px 50px;
+            color: black;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        .btnwebcam:hover{
+            background-color:rgba(211,211,211,0.5);
+            text-decoration: none;
         }
 
         @media (max-width: 767px) {
@@ -96,6 +128,8 @@
         </address>
     </header>
     {% block body %} {% endblock %}
+<<<<<<< HEAD
+=======
     <!-- jQuery -->
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/animsition.min.js') }}"></script>
@@ -132,7 +166,7 @@
     <!-- Scripts -->
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
     <script src="{{ url_for('static', filename='js/rev-slider-init.js') }}"></script>
-
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script>
         $(function () {
             $('#lokaal').click(function () {
@@ -212,6 +246,6 @@
 
         });
     </script>
+>>>>>>> 6b59a605b7806afb147c3cbcf0989f570e19d3f1
 </body>
-
 </html>

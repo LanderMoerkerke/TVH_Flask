@@ -376,26 +376,6 @@ a:focus{
 
 /* 1.4 Buttons */
 
-.btnStart{
-  -webkit-border-radius: 30;
-  -moz-border-radius: 30;
-  border-radius: 30px;
-  font-family: Roboto;
-  border: solid rgba(169,169,169);
-  color: blue;
-  font-size: 25px;
-  padding: 10px 40px 10px 40px;
-  text-decoration: none;
-  background: white;
-  border-width: thin;
-  width:20%;
-  margin-right: 2px;
-}
-.btnStart:hover{
-  background: rgba(169,169,169,0.1);
-  text-decoration: none;
-}
-
 .btnJA{
   -webkit-border-radius: 30;
   -moz-border-radius: 30;
@@ -474,8 +454,16 @@ a:focus{
   margin-right:20%;
   /*background-color: rgba(255, 0, 0, 0.05);*/
   padding-bottom: 20px;
-
-
+}
+.vragenpast{
+  text-align:center;
+  border: solid rgba(169,169,169,0.7);
+  margin-top:25px;
+  margin-left:20%;
+  margin-right:20%;
+  /*background-color: rgba(255, 0, 0, 0.05);*/
+  padding-bottom: 20px;
+  max-width: 150px;
 }
 
 .overzicht{
@@ -491,7 +479,7 @@ a:focus{
 }
 
 .rightside{
-  text-align:left;
+  text-align:center;
 }
 
 .btn{
@@ -954,7 +942,6 @@ a.brand:focus{
   overflow-x:hidden;
   overflow-y:auto;
   -webkit-overflow-scrolling:touch;
-  overflow-scrolling:touch;
   font-weight: 600;
   letter-spacing: -0.025rem;
   list-style: none;

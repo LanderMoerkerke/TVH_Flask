@@ -19,18 +19,22 @@
     <script src="{{ url_for('static', filename='js/smooth-scroll.min.js') }}"></script>
 
     <style>
-        .btnStart {
-            border-radius: 30px;
-            margin-top: 10px;
-            border: solid rgba(169, 169, 169);
-            color: mediumseagreen;
-            font-size: 20px;
-            text-align: center;
-            padding: 10px 20px 10px 20px;
+
+        .btnStart{
+            background-color: rgba(220,220,220,0.5);
+            border: solid lightgrey;
+            color:grey;
+            text-align:center;
+            font-size: 15px;
             text-decoration: none;
-            background: white;
-            border-width: thin;
-            width: 20%;
+            padding: 10px 15px 10px 15px;
+        }
+
+        .startbutton{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width:30%;
         }
 
 
@@ -95,17 +99,17 @@
                 <div class="container">
                     <div class="intro">
                         <div class="row">
-                            <div class="col-md-12" style="margin-bottom:75px;">
+                            <div class="col-md-12" style="margin-bottom:150px;">
                                 <div class="col-md-6">
 
                                     <strong class="section-subtitle"></strong>
-                                    <h2 class="section-title section-about-title" style="margin-bottom: 20px;"> Opdracht 3
-                                        <br> Scan uw product hier </h2>
-                                    <a href="{{ url_for('upload') }}">
-                                        <button class="btnStart" type="button">Start</button>
+                                    <h2 class="section-title section-about-title" style="margin-bottom:0px;"> Opdracht 3</h2>
+                                    <h5 style="margin-bottom: 20px;" >Scan uw product hier</h5>
+                                    <a href="{{ url_for('upload') }}" >
+                                        <p class="btnStart" style="color:black; text-decoration:none;" >Start </p>
                                     </a>
                                 </div>
-                                <div style="" class="col-md-5 col-md-offset-1">
+                                <div class="col-md-5 col-md-offset-1">
                                     <div class="dots-image">
                                         <img alt="Project-team" class="about-img img-responsive" src="{{ url_for('static',filename='img/chip.png') }}" style="max-height: 400px; max-width: 300px;">
                                     </div>
@@ -113,13 +117,15 @@
                                     </div>
                                 </div>
                             </div>
+                            <hr style="max-height:10px; margin-top: 50px; margin-bottom: 50px;">
+
                             <div class="col-md-12">
                                 <div class="col-md-6">
                                     <div class="dots-image">
                                         <img alt="Project-team" class="about-img img-responsive" src="{{ url_for('static',filename='img/team.png') }}" style="max-height: 400px;">
                                     </div>
                                 </div>
-                                <div style="" class="col-md-5 col-md-offset-1">
+                                <div class="col-md-5 col-md-offset-1">
                                     <h2 class="section-title section-about-title" style="margin-bottom: 20px;">Achter de schermen</h2>
                                     <p>
                                         <strong>Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen.

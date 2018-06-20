@@ -4,6 +4,8 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, Response
 from flask_uploads import UploadSet, configure_uploads, IMAGES
 
+from time import sleep
+
 # Imports ML
 from keras.models import load_model
 
@@ -137,6 +139,12 @@ app.config['UPLOADED_PHOTOS_DEST'] = os.path.join(
 configure_uploads(app, photos)
 
 
+def delete_camera_pic():
+    if 'camera.jpg' in os.listdir("./static/uploads"):
+        os.remove('./static/uploads/camera.jpg')
+        print("Camera pic deleted")
+
+
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     # Globale variabelen
@@ -144,11 +152,12 @@ def upload():
 
     if request.method == 'POST' and 'photo' in request.files:
         filename = photos.save(request.files['photo'])
-        print(filename)
+        # print("filename", filename)
 
         # Inlezen van image (gekregen van vorige pagina, beslissen in load_image naar welke pagina.)
         _IMAGE = os.path.join(
             os.path.dirname(__file__), 'static/uploads', filename)
+        # print("image", _IMAGE)
         _IMAGE = imread(_IMAGE, as_grey=True)
         _IMAGE = cv2.resize(_IMAGE, (256, 256), interpolation=cv2.INTER_LINEAR)
 
@@ -217,14 +226,17 @@ def upload():
 @app.route('/capture_image')
 def capture_image():
     """Capture image."""
+    global Cam
+    Cam = Camera()
     return render_template('capture.html')
 
 
 @app.route('/video_feed')
 def video_feed():
+    global Cam
     """Video streaming route. Put this in the src attribute of an img tag."""
     return Response(
-        gen(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
+        gen(Cam), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 def gen(camera):
@@ -233,6 +245,82 @@ def gen(camera):
         frame = camera.get_frame()
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + bytes(frame) + b'\r\n')
+
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    # Globale variabelen
+    global klasses, d, counter_answer, _QUESTIONS, _IMAGE, filename, Cam
+
+    im = Cam.get_pic()
+    del Cam
+
+    filename = "camera_sk.jpg"
+    # print("filename", filename)
+
+    # Inlezen van image (gekregen van vorige pagina, beslissen in load_image naar welke pagina.)
+    _IMAGE = os.path.join('./static/uploads', filename)
+    print(_IMAGE)
+
+    _IMAGE = imread(_IMAGE, as_grey=True)
+
+    _IMAGE = cv2.resize(_IMAGE, (256, 256), interpolation=cv2.INTER_LINEAR)
+    _IMAGE = _IMAGE.reshape(-1, 256, 256, 1)
+
+    # Predictie doen op image.
+    # Indien maximum uit deze lijst groter is dan 95 meteen naar eindpagina.
+
+    proba = model.predict_proba(_IMAGE)
+    proba = proba[0].tolist()
+
+    # Dictionary maken & sorteren#
+    d = dict(zip(klasses, proba))
+    sorted_d = sorted(d.items(), key=operator.itemgetter(1), reverse=True)
+
+    # Dataset maken van gesorteerde predictie#
+    dataset = pd.DataFrame(sorted_d, columns=['GroupId', 'Proba'])
+
+    _MAXIMUM = max(proba)
+    if _MAXIMUM > 0.95:
+
+        # Waardes (max & klasse) om door te sturen naar eindpagina
+        _GROUP = get_key_by_value(d, _MAXIMUM)
+        return prediction(_GROUP, _MAXIMUM)
+    else:
+        _QUESTIONS = []
+
+        # Navigeren naar vragenronde met beste 3 categorieën
+        decisionList = list(dataset['GroupId'][:3])
+
+        # Enkel data uithalen met de gekregen groupcodes
+        dataset_tree = dataset_one_hot_encoding.loc[
+            dataset_one_hot_encoding.GroupCode.isin(decisionList), :]
+        dataset_tree.reset_index(drop=True, inplace=True)
+
+        # Tree genereren & in code plaatsen.
+        X = dataset_tree.iloc[:, 1:]
+        y = dataset_tree.iloc[:, 0]
+
+        tree = DecisionTreeClassifier()
+        tree.fit(X, y)
+
+        tree_in_code = ""
+
+        _QUESTIONS = tree_to_code(tree, X.columns, y)
+
+        print('QUESTIONS', _QUESTIONS)
+        print(len(_QUESTIONS))
+        print((_QUESTIONS[1]))
+
+        while len(_QUESTIONS) < 5 and isinstance(_QUESTIONS[1], int):
+            _QUESTIONS = tree_to_code(tree, X.columns, y)
+
+        print('BOOOOOOOM', _QUESTIONS)
+        print(type(_QUESTIONS))
+
+        # Doorsturen output
+        return questions(_QUESTIONS)
+
 
 @app.route('/questions')
 def questions(lijst):
@@ -270,7 +358,10 @@ def button_press_no():
         print("NEE 1x")
         question_answer = _QUESTIONS[0] + " - " + "Nee."
 
-        return render_template('questions.html', lijst=_QUESTIONS[1], question_answer= question_answer)
+        return render_template(
+            'questions.html',
+            lijst=_QUESTIONS[1],
+            question_answer=question_answer)
 
         #_PERC = d.get(int(_QUESTIONS[4]).__str__())
         #return prediction(_QUESTIONS[4], _PERC)

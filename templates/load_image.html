@@ -1,23 +1,32 @@
 {% extends 'layout.html' %} {% block title %} Image upload {% endblock %} {% block body %}
-<h1>Image upload</h1>
-<div class="content" style="margin-top: 2%">
+<h1>Afbeelding opladen</h1>
+<div class="content" style="margin-top:20px;">
     <div class="container">
         <div class="intro">
             <div class="row vragen">
                 <div class="col-md-12">
-                    <h3 class="headervragen">Upload Image</h3>
+                    <h3 class="headervragen">Afbeelding invoegen</h3>
+                    <div class="col-md-6">
+                        <p style="text-align:center; margin-bottom: 2px;">Bestand selecteren</p>
+                        <hr style="margin-top:5px;">
                     <form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
-                        <input type=file name=photo style="margin:0 auto;">
-                        <input class="btnsubmit" type="submit" style="text-align:center;">
-                        <a href="{{ url_for('capture_image') }}">
-                            <input type="button" value="Maak zelf een foto" />
-                        </a>
+                        <input type=file name=photo style="margin:0 auto;" required>
+                         <input class="btnsubmit" type="submit" style="text-align:center;">
                     </form>
-                    <a href="{{ url_for('index') }}">
-                        <button class="btnhome">Home</button>
-                    </a>
+                    </div>
+                    <div class="col-md-6">
+                        <p style="text-align:center; margin-bottom: 2px;">Foto nemen webcam</p>
+                        <hr style="margin-top:5px;">
+                        <a href="{{ url_for('capture_image') }}">
+                            <input class="btnwebcam" type="button" value="Maak zelf een foto" />
+                        </a>
+                    </div>
+
                 </div>
             </div>
+            <a href="{{ url_for('index') }}" class="btncenter">
+                        <button class="btnhome">Back to home</button>
+            </a>
         </div>
     </div>
 </div>
