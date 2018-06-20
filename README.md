@@ -14,7 +14,7 @@
 pip install -r requirements.txt
 ```
 
-3. Place the pre-trained model file inside a model folder then move this these inside the static folder.
+1. Place the pre-trained model file inside a newly created folder created folder called "model". Then move this folder inside the static directory.
 
 ## Run
 
