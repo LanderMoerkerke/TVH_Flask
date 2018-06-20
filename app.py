@@ -21,6 +21,7 @@ import operator
 
 from static.classes.Camera import Camera
 
+
 # Functies
 _TREE = []
 counter1 = 0
@@ -159,7 +160,7 @@ def upload():
         proba = model.predict_proba(_IMAGE)
         proba = proba[0].tolist()
 
-        # Dictionary maken & sorteren#
+        # Dictionary maken & sorteren
         d = dict(zip(klasses, proba))
         sorted_d = sorted(d.items(), key=operator.itemgetter(1), reverse=True)
 
@@ -199,9 +200,9 @@ def upload():
             print((_QUESTIONS[1]))
 
             while len(_QUESTIONS) < 5 and isinstance(_QUESTIONS[1], int):
+                tree.fit(X, y)
                 _QUESTIONS = tree_to_code(tree, X.columns, y)
 
-            print('BOOOOOOOM', _QUESTIONS)
             print(type(_QUESTIONS))
 
             # Doorsturen output
