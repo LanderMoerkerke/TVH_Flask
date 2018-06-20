@@ -19,22 +19,23 @@
     <script src="{{ url_for('static', filename='js/smooth-scroll.min.js') }}"></script>
 
     <style>
-
-        .btnStart{
-            background-color: rgba(220,220,220,0.5);
+        .btnStart {
+            background-color: rgba(220, 220, 220, 0.5);
             border: solid lightgrey;
-            color:grey;
-            text-align:center;
+            color: grey;
+            text-align: center;
             font-size: 15px;
             text-decoration: none;
             padding: 10px 15px 10px 15px;
+            display: inline;
+            border-radius: 7px;
         }
 
-        .startbutton{
+        .startbutton {
             display: block;
             margin-left: auto;
             margin-right: auto;
-            width:30%;
+            width: 30%;
         }
 
 
@@ -104,9 +105,9 @@
 
                                     <strong class="section-subtitle"></strong>
                                     <h2 class="section-title section-about-title" style="margin-bottom:0px;"> Opdracht 3</h2>
-                                    <h5 style="margin-bottom: 20px;" >Scan uw product hier</h5>
-                                    <a href="{{ url_for('upload') }}" >
-                                        <p class="btnStart" style="color:black; text-decoration:none;" >Start </p>
+                                    <h5 style="margin-bottom: 20px;">Scan uw product hier</h5>
+                                    <a href="{{ url_for('upload') }}">
+                                        <p class="btnStart" style="color:black; text-decoration:none;">Start </p>
                                     </a>
                                 </div>
                                 <div class="col-md-5 col-md-offset-1">
