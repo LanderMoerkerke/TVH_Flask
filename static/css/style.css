@@ -445,6 +445,8 @@ a:focus{
   margin-left:30%;
   margin-right:30%;
   border-radius: 5px;
+  margin-bottom: 5px;
+  vertical-align: sub;
 }
 
 .vragen{
