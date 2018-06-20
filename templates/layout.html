@@ -33,7 +33,7 @@
             border-radius: 10px;
         }
 
-        .btnsubmit:hover{
+        .btnsubmit:hover {
             background: lightgrey;
             text-decoration: none;
         }
@@ -53,12 +53,13 @@
             margin-left: auto;
             margin-right: auto;
         }
-        .btnhome:hover{
+
+        .btnhome:hover {
             background-color: lightgrey;
             text-decoration: none;
         }
 
-        .btncenter{
+        .btncenter {
             display: block;
             margin-left: auto;
             margin-right: auto;
@@ -66,11 +67,11 @@
             width: 20%;
         }
 
-        .btncenter:hover{
-            text-decoration:none;
+        .btncenter:hover {
+            text-decoration: none;
         }
 
-        .btnwebcam{
+        .btnwebcam {
             border: dotted grey;
             border-width: thin;
             text-align: center;
@@ -80,8 +81,8 @@
             border-radius: 10px;
         }
 
-        .btnwebcam:hover{
-            background-color:rgba(211,211,211,0.5);
+        .btnwebcam:hover {
+            background-color: rgba(211, 211, 211, 0.5);
             text-decoration: none;
         }
 
@@ -117,16 +118,17 @@
 
 <body>
     <header class="navbar boxed js-navbar">
-        <a class="brand" href="#">
+        <a class="brand" href="{{ url_for('index') }}">
             <img alt="" src="{{ url_for('static',filename='img/tvh.png') }}">
         </a>
 
         <address class="navbar-address hidden-sm hidden-xs">
-            <a class="brand" href="#">
+            <a class="brand" href="{{ url_for('index') }}">
                 <img alt="" src="{{ url_for('static',filename='img/Howest.png') }}">
             </a>
         </address>
     </header>
     {% block body %} {% endblock %}
 </body>
+
 </html>
