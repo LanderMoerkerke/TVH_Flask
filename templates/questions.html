@@ -1,49 +1,48 @@
-{% extends 'layout.html' %}
-{% block title %}
-Homepage
-{% endblock %}
-{% block body %}
+{% extends 'layout.html' %} {% block title %} Homepage {% endblock %} {% block body %}
 
-    <!-- Navbar -->
+<!-- Navbar -->
 
 <header class="navbar boxed js-navbar">
 
-            <a class="brand" href="index.html">
-                <img alt="" src="{{ url_for('static',filename='img/tvh.png') }}">
-            </a>
+    <a class="brand" href="index.html">
+        <img alt="" src="{{ url_for('static',filename='img/tvh.png') }}">
+    </a>
 
-            <address class="navbar-address hidden-sm hidden-xs">
-                <a class="brand" href="#">
-                    <img alt="" src="{{ url_for('static',filename='img/Howest.png') }}">
-                </a>
-            </address>
+    <address class="navbar-address hidden-sm hidden-xs">
+        <a class="brand" href="#">
+            <img alt="" src="{{ url_for('static',filename='img/Howest.png') }}">
+        </a>
+    </address>
 
 
 
 </header>
 
 
-    <div class="content" style="margin-top: 10%">
-      <div class="container">
-            <div class="intro">
-                      <div class="row vragen">
-                        <div class="col-md-12">
-                          <h3 class="headervragen">Beantwoord volgende vragen:</h3>
-                          <h1 style="margin-bottom:30px;">{{ lijst }}</h1>
-                          <a href="{{ url_for('button_press_yes') }}"><button class="btnJA" type="button">Ja</button></a>
-                          <a href="{{ url_for('button_press_no') }}"><button class="btnNEE" type="button">Neen</button></a>
-                      </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-12" 
-                  style="text-align:center;
-                  margin: 0 auto;">
-                  <h3 class="headervragen">Gestelde vragen:</h3>
-                    <p>{{ question_answer }}</p>
-                  </div>
-                    
+<div class="content" style="margin-top: 10%">
+    <div class="container">
+        <div class="intro">
+            <div class="row vragen">
+                <div class="col-md-12">
+                    <h3 class="headervragen">Beantwoord volgende vragen:</h3>
+                    <h1 style="margin-bottom:30px;">{{ lijst }}?</h1>
+                    <a href="{{ url_for('button_press_yes') }}">
+                        <button class="btnJA" type="button">Ja</button>
+                    </a>
+                    <a href="{{ url_for('button_press_no') }}">
+                        <button class="btnNEE" type="button">Neen</button>
+                    </a>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" style="text-align:center;
+                  margin: 0 auto;">
+        <h3 class="headervragen">Gestelde vragen:</h3>
+        <p>{{ question_answer }}</p>
+    </div>
+
+</div>
 
 
 {% endblock %}
