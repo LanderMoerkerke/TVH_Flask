@@ -1,73 +1,79 @@
-{% extends 'layout.html' %}
-{% block title %}
-Prediction
-{% endblock %}
-{% block body %}
-    <!-- Navbar -->
-    <header class="navbar boxed js-navbar" style="margin-bottom: 50px;">
+{% extends 'layout.html' %} {% block title %} Prediction {% endblock %} {% block body %}
+<!-- Navbar -->
+<header class="navbar boxed js-navbar" style="margin-bottom: 50px;">
 
-            <a class="brand" href="#">
-                <img alt="" src="{{ url_for('static',filename='img/tvh.png') }}">
-            </a>
+    <a class="brand" href="#">
+        <img alt="" src="{{ url_for('static',filename='img/tvh.png') }}">
+    </a>
 
-            <address class="navbar-address hidden-sm hidden-xs">
-                <a class="brand" href="#">
-                    <img alt="" src="{{ url_for('static',filename='img/Howest.png') }}">
-                </a>
-            </address>
-    </header>
+    <address class="navbar-address hidden-sm hidden-xs">
+        <a class="brand" href="#">
+            <img alt="" src="{{ url_for('static',filename='img/Howest.png') }}">
+        </a>
+    </address>
+</header>
 
 
-    <div class="content" style="margin-top: 10%">
-      <div class="container">
-                        <div class="col-md-12 overzicht" style="margin-bottom: 50px;">
-                          <div class="col-md-6 leftside">
-                          <strong class="section-subtitle">VOORSPELLING</strong>
-                          <h5 class="section-title section-about-title" style="margin-bottom: 20px; font-weight: lighter;">groepscode<br><div class="groupcode">
-                          {{ group }}</div></h5>
-                          <div class="btnmatch">
-                                <p>Match: {{ maximum }}% <p>
-                        </div>
-                        <p>*accuraatheid enkel van toepassing op de gegeven afbeelding.<br><strong>niet </strong>op de vragen</p>
-                          </div>
-                          <div class="col-md-5 col-md-offset-1 rightside">
-                                <img src="{{ url_for('static', filename='cats/' + group + '.jpg') }}" style="max-width: 250px; max-height:180px; border: solid black; border-width: thin;">
-                          </div>
-                          <div class="clearfix">
-                          </div>
-                        </div>
-
-                        <div class="col-md-12 overzicht"  style="margin-bottom: 50px;">
-                                <div class="col-md-6 leftside">
-                                        <strong class="section-subtitle" style="text-align: center";>Parameters groepscode</strong>
-                                </div>
-                                <div class="col-md-5 col-md-offset-1 rightside">
-                                        <ol>
-                                                {% for char in chars_list %}
-                                                    <li>{{ char }}</li>
-                                                {% endfor %}
-                                        </ol>
-                                </div>
-                                <div class="clearfix">
-                                </div>
-                          </div>
-
-                      <div class="col-md-12 overzicht">
-                            <div class="col-md-6 leftside">
-                                <strong class="section-subtitle"> GEGEVEN</strong>
-                                <h5 class="section-title section-about-title" style="margin-bottom: 20px; font-weight: lighter;">naam afbeelding<br><div class="groupcode">
-                                       108054026.jpg</div></h5>
-                            </div>
-                            <div class="col-md-5 col-md-offset-1 rightside">
-                                <img src="{{ url_for('static', filename='uploads/' + image) }}" style="max-width: 250px; max-height:180px; border: solid black; border-width: thin;">
-                            </div>
-                            <div class="clearfix">
-                                </div>
-                      </div>
-                      
+<div class="content" style="margin-top: 10%">
+    <div class="container">
+        <div class="col-md-12 overzicht" style="margin-bottom: 50px;">
+            <div class="col-md-6 leftside">
+                <strong class="section-subtitle">VOORSPELLING</strong>
+                <h5 class="section-title section-about-title" style="margin-bottom: 20px; font-weight: lighter;">groepscode
+                    <br>
+                    <div class="groupcode">
+                        {{ group }}</div>
+                </h5>
+                <div class="btnmatch">
+                    <p>Match: {{ maximum }}%
+                        <p>
                 </div>
-                <div style="margin-bottom:250px;">
-                <a href="{{ url_for('index') }}" style="
+                <p>*accuraatheid enkel van toepassing op de gegeven afbeelding.
+                    <br>
+                    <strong>niet </strong>op de vragen</p>
+            </div>
+            <div class="col-md-5 col-md-offset-1 rightside">
+                <img src="{{ url_for('static', filename='cats/' + group + '.jpg') }}" style="max-width: 250px; max-height:180px; border: solid black; border-width: thin;">
+            </div>
+            <div class="clearfix">
+            </div>
+        </div>
+
+        <div class="col-md-12 overzicht" style="margin-bottom: 50px;">
+            <div class="col-md-6 leftside">
+                <strong class="section-subtitle" style="text-align: center" ;>Parameters groepscode</strong>
+            </div>
+            <div class="col-md-5 col-md-offset-1 rightside">
+                <ol>
+                    {% for char in chars_list %}
+                    <li>{{ char }}</li>
+                    {% endfor %}
+                </ol>
+            </div>
+            <div class="clearfix">
+            </div>
+        </div>
+
+        <div class="col-md-12 overzicht">
+            <div class="col-md-6 leftside">
+                <strong class="section-subtitle"> GEGEVEN</strong>
+                <h5 class="section-title section-about-title" style="margin-bottom: 20px; font-weight: lighter;">naam afbeeldingnaam af
+                    <br>
+                    <div class="groupcode">
+                        {{ image }}
+                    </div>
+                </h5>
+            </div>
+            <div class="col-md-5 col-md-offset-1 rightside">
+                <img src="{{ url_for('static', filename='uploads/' + image) }}" style="max-width: 250px; max-height:180px; border: solid black; border-width: thin;">
+            </div>
+            <div class="clearfix">
+            </div>
+        </div>
+
+    </div>
+    <div style="margin-bottom:250px;">
+        <a href="{{ url_for('index') }}" style="
                 text-align: center;
                 float:left;
                 padding: 15px;
@@ -75,9 +81,8 @@ Prediction
                 border-width: thin;
                 margin-left:35%;
                 margin-top: 20px;
-                margin-bottom: 50p;"
-                >Home</a>
-                <a href="{{ url_for('upload') }}" style="
+                margin-bottom: 50p;">Home</a>
+        <a href="{{ url_for('upload') }}" style="
                 text-align: center;
                 float:right;
                 border:solid grey;
@@ -87,5 +92,5 @@ Prediction
                 margin-top: 20px;
                 margin-bottom: 50p;
                 ">Start</a>
-                </div>
-{% endblock %}
+    </div>
+    {% endblock %}

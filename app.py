@@ -113,7 +113,7 @@ question_answer = ""
 
 # Initialise model
 filename_model = os.path.join(
-    os.path.dirname(__file__), 'static/model', 'Lander_65_proc.h5')
+    os.path.dirname(__file__), 'static/model', 'my_model_test.h5')
 
 model = load_model(filename_model)
 model._make_predict_function()
@@ -168,7 +168,7 @@ def upload():
         proba = model.predict_proba(_IMAGE)
         proba = proba[0].tolist()
 
-        # Dictionary maken & sorteren#
+        # Dictionary maken & sorteren
         d = dict(zip(klasses, proba))
         sorted_d = sorted(d.items(), key=operator.itemgetter(1), reverse=True)
 
@@ -208,9 +208,9 @@ def upload():
             print((_QUESTIONS[1]))
 
             while len(_QUESTIONS) < 5 and isinstance(_QUESTIONS[1], int):
+                tree.fit(X, y)
                 _QUESTIONS = tree_to_code(tree, X.columns, y)
 
-            print('BOOOOOOOM', _QUESTIONS)
             print(type(_QUESTIONS))
 
             # Doorsturen output
