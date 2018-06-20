@@ -10,7 +10,7 @@
                         <p style="text-align:center; margin-bottom: 2px;">Bestand selecteren</p>
                         <hr style="margin-top:5px;">
                     <form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
-                        <input type=file name=photo style="margin:0 auto;">
+                        <input type=file name=photo style="margin:0 auto;" required>
                          <input class="btnsubmit" type="submit" style="text-align:center;">
                     </form>
                     </div>
