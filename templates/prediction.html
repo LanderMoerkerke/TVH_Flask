@@ -25,12 +25,9 @@
                         {{ group }}</div>
                 </h5>
                 <div class="btnmatch">
-                    <p>Match: {{ maximum }}%
-                        <p>
+                    <p style="margin-top:10%;">Match: {{ maximum }}%</p>
                 </div>
-                <p>*accuraatheid enkel van toepassing op de gegeven afbeelding.
-                    <br>
-                    <strong>niet </strong>op de vragen</p>
+                <p style="font-size:12px; margin-bottom: 8px;">*accuraatheid enkel op de gegeven afbeelding <strong>niet </strong>op de vragen</p>
             </div>
             <div class="col-md-5 col-md-offset-1 rightside">
                 <img src="{{ url_for('static', filename='cats/' + group + '.jpg') }}" style="max-width: 250px; max-height:180px; border: solid black; border-width: thin;">
@@ -57,7 +54,7 @@
         <div class="col-md-12 overzicht">
             <div class="col-md-6 leftside">
                 <strong class="section-subtitle"> GEGEVEN</strong>
-                <h5 class="section-title section-about-title" style="margin-bottom: 20px; font-weight: lighter;">naam afbeeldingnaam af
+                <h5 class="section-title section-about-title" style="margin-bottom: 20px; font-weight: lighter;">naam afbeelding
                     <br>
                     <div class="groupcode">
                         {{ image }}
