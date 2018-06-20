@@ -113,7 +113,7 @@ question_answer = ""
 
 # Initialise model
 filename_model = os.path.join(
-    os.path.dirname(__file__), 'static/model', 'my_model_test.h5')
+    os.path.dirname(__file__), 'static/model', 'my_model_v4_aug.h5')
 
 model = load_model(filename_model)
 model._make_predict_function()
@@ -151,7 +151,7 @@ def upload():
 
     if request.method == 'POST' and 'photo' in request.files:
         filename = photos.save(request.files['photo'])
-        # print("filename", filename)
+        print("filename", filename)
 
         # Inlezen van image (gekregen van vorige pagina, beslissen in load_image naar welke pagina.)
         _IMAGE = os.path.join(
@@ -262,6 +262,8 @@ def predict():
     print(_IMAGE)
 
     _IMAGE = imread(_IMAGE, as_grey=True)
+    # from skimage.io import imsave
+    # imsave("test.jpg", _IMAGE)
 
     _IMAGE = cv2.resize(_IMAGE, (256, 256), interpolation=cv2.INTER_LINEAR)
     _IMAGE = _IMAGE.reshape(-1, 256, 256, 1)
